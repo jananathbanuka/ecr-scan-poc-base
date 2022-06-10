@@ -33,7 +33,7 @@ runs:
       uses: actions/checkout@v3
 
     - name: Prerequisite Variables
-      if: ${{ inputs.NOTIFICATION_TYPES == 'pull_request' }}
+      if: contains('${{ inputs.NOTIFICATION_TYPES }}', 'pull_request')
       run: ${{ github.action_path }}/prerequisite.sh
       shell: bash
       env:
