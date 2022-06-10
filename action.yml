@@ -24,18 +24,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Prerequisite Variables
-        if: contains(${{ inputs.NOTIFICATION_TYPES }}, 'pull-request')
-        run: ./prerequisite.sh
+      # - name: Prerequisite Variables
+      #   if: contains(${{ inputs.NOTIFICATION_TYPES }}, 'pull-request')
+      #   run: ./prerequisite.sh
 
-      - name: Check Prerequisite Variables
-        if: contains(${{ inputs.NOTIFICATION_TYPES }}, 'pull-request')
-        run: |
-          echo ${{ env.CRITICAL_VULNERABILITIES_FOUND }}
+      # - name: Check Prerequisite Variables
+      #   if: contains(${{ inputs.NOTIFICATION_TYPES }}, 'pull-request')
+      #   run: |
+      #     echo ${{ env.CRITICAL_VULNERABILITIES_FOUND }}
 
  
- 
- 
+      - run: echo Hello ${{ inputs.IMAGE }}.
+        shell: bash
  
  
       # ##################
