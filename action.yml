@@ -15,15 +15,6 @@ inputs:
   GITHUB_ACCESS_TOKEN:
     required: false
     description: 'github Access token to update the PR (required only if "NOTIFICATION_TYPES" contains pull-request)'
-  GITHUB_SERVER_URL:
-    required: false
-    description: 'github server url'  
-  GITHUB_REPOSITORY:
-    required: false
-    description: 'name of the github repository'  
-  GITHUB_RUN_ID:
-    required: false
-    description: 'github action run id'  
 
 runs:
   using: "composite"
@@ -42,7 +33,7 @@ runs:
         GITHUB_RUN_ID: ${{ github.run_id }}               
 
     ##################
-    #### Pull Requests
+    #### Pull Request
     ##################
     - name: Setting Up Pull-Request Body
       if: contains(inputs.NOTIFICATION_TYPES, 'pull_request')
@@ -68,104 +59,16 @@ runs:
         body-uppercase-base-match: false
 
 
-      # ##################
-      # #### Slack
-      # ##################
-      # - name: Setting Up Slack Notification
-      #   if: contains('${{ inputs.NOTIFICATION_TYPES }}', 'slack')
-      #   run: ./slack.sh
-      #   env:
-      #     DOCKER_IMAGE_TO_SCAN: ${{ inputs.IMAGE }}
-          
-
-
-      # - name: Developers - View Complete Report
-        
-      #   run: |
-      #     trivy image --severity HIGH,CRITICAL ${{ env.DOCKER_IMAGE_TO_SCAN }}
-  
-
-      # - name: Send Slack Notification
-      #   id: slack
-      #   uses: slackapi/slack-github-action@v1.19.0
-      #   if: contains('${{ inputs.NOTIFICATION_TYPES }}', 'slack')
-      #   with:
-      #     payload: |
-      #       {
-      #         "attachments": [
-      #           {
-      #             "color": "${{ env.SLACK_ATTACHMENT_BAR_COLOR }}",
-      #             "blocks": [
-      #               {
-      #                 "type": "header",
-      #                 "text": {
-      #                   "type": "plain_text",
-      #                   "text": "${{ env.TEST_RESULT_EMOJI }} ${{ env.SUMMARY_REPORT_MSG }}",
-      #                   "emoji": true
-      #                 }
-      #               },
-      #               {
-      #                 "type": "header",
-      #                 "text": {
-      #                   "type": "plain_text",
-      #                   "text": "Scan Summary",
-      #                   "emoji": true
-      #                 }
-      #               },
-      #               {
-      #                 "type": "divider"
-      #               },
-      #               {
-      #                 "type": "section",
-      #                 "fields": [
-      #                   {
-      #                     "type": "mrkdwn",
-      #                     "text": "```Severity```"
-      #                   },
-      #                   {
-      #                     "type": "mrkdwn",
-      #                     "text": "```Vulnerability Count```"
-      #                   },
-      #                   {
-      #                     "type": "mrkdwn",
-      #                     "text": "${{ env.CRITICAL_EMOJI }} Critical"
-      #                   },
-      #                   {
-      #                     "type": "mrkdwn",
-      #                     "text": "${{ env.CRITICAL_NUMBER_OF_VULNERABILITIES }}"
-      #                   },
-      #                   {
-      #                     "type": "mrkdwn",
-      #                     "text": "${{ env.HIGH_EMOJI }} High"
-      #                   },
-      #                   {
-      #                     "type": "mrkdwn",
-      #                     "text": "${{ env.HIGH_NUMBER_OF_VULNERABILITIES }}"
-      #                   }
-      #                 ]
-      #               },
-      #               {
-      #                 "type": "section",
-      #                 "text": {
-      #                   "type": "mrkdwn",
-      #                   "text": ":memo: See the Full Scanning Report"
-      #                 },
-      #                 "accessory": {
-      #                   "type": "button",
-      #                   "text": {
-      #                     "type": "plain_text",
-      #                     "text": "View Report",
-      #                     "emoji": true
-      #                   },
-      #                   "value": "report",
-      #                   "url": "${{ env.GITHUB_ACTION_URL }}",
-      #                   "action_id": "button-action"
-      #                 }
-      #               }
-      #             ]
-      #           }
-      #         ]
-      #       }                              
-      #   env:
-      #     SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
-      #     SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+      ##################
+      #### Slack
+      ##################
+      - name: Send Slack Notification
+        id: slack
+        uses: slackapi/slack-github-action@v1.19.0
+        if: contains(inputs.NOTIFICATION_TYPES, 'slack')
+        with:
+          payload-file-path: "./payload-slack-content.json"
+                                  
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
