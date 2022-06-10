@@ -19,8 +19,6 @@ inputs:
     required: false
     description: 'slack webhook url'  
 
-  
-
 runs:
   using: "composite"
   steps:
@@ -35,11 +33,9 @@ runs:
         DOCKER_IMAGE_TO_SCAN: ${{ inputs.IMAGE }}
         GITHUB_SERVER_URL: ${{ github.server_url }}
         GITHUB_REPOSITORY: ${{ github.repository }}
-        GITHUB_RUN_ID: ${{ github.run_id }}               
+        GITHUB_RUN_ID: ${{ github.run_id }}  
+        IMAGE: ${{ inputs.IMAGE }}             
 
-    ##################
-    #### Pull Request
-    ##################
     - name: Setting Up Pull-Request Body
       if: contains(inputs.NOTIFICATION_TYPES, 'pull_request')
       run: ${{ github.action_path }}/pull-request.sh
@@ -63,10 +59,6 @@ runs:
         body-update-action: 'suffix'
         body-uppercase-base-match: false
 
-
-    ##################
-    #### Slack
-    ##################
     - name: Send Slack Notification
       id: slack
       uses: slackapi/slack-github-action@v1.19.0
