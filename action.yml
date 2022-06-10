@@ -8,7 +8,7 @@ inputs:
     description: 'name of image built'   
   NOTIFICATION_TYPES:
     required: false
-    description: 'comma separated list notification types (slack, pull-request)'
+    description: 'comma separated list notification types (slack, pull_request)'
   SLACK_WEBHOOK:
     required: false
     description: 'slack webhook url for notifications (required only if NOTIFICATION_TYPES contains slack)'
