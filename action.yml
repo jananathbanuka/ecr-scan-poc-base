@@ -47,6 +47,7 @@ runs:
     - name: Setting Up Pull-Request Body
       if: contains(inputs.NOTIFICATION_TYPES, 'pull_request')
       run: ${{ github.action_path }}/pull-request.sh
+      shell: bash
       env:
         GITHUB_ACTION_URL: ${{ env.GITHUB_ACTION_URL }}
         test_result_emoji: ${{ env.TEST_RESULT_EMOJI }}
