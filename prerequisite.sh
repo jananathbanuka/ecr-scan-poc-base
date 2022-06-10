@@ -16,7 +16,6 @@ summary_report_msg="No Vulnerabilities Found, Everything looks Good!"
 critical_emoji=":red_circle:"
 if [[ $critical2 -eq 0 ]]; then
     critical_emoji=":white_check_mark:"
-    $critical2="0"
 else
     slack_attachment_bar_color="#FE360C" # red
     summary_report_msg="CRITICAL Vulnerabilities Found!, Fix Immediately!!!"
@@ -25,10 +24,9 @@ fi
 high_emoji=":large_orange_diamond:"
 high_vulnerabilities_found="false"
 if [[ $high2 -eq 0 ]]; then
-    high_emoji=":white_check_mark:"
-    $high2="0"
+    high_emoji=":white_check_mark:"    
 elif [[ $critical2 -eq 0 ]] && [[ $high2  -ne 0 ]]; then
-    $critical2="0"
+    
     high_vulnerabilities_found="true"
     slack_attachment_bar_color="#FBB215" # orange\
     summary_report_msg="HIGH Vulnerabilities Found!, Have a Look!"
@@ -37,10 +35,9 @@ fi
 
 test_result_emoji=":boom:"
 critical_vulnerabilities_found="false"
+
 if [[ $critical2 -eq 0 ]] && [[ $high2  -eq 0 ]]; then
-    test_result_emoji=":eight_spoked_asterisk:"
-    $critical2="0"
-    $high2="0"
+    test_result_emoji=":eight_spoked_asterisk:" 
 else
     critical_vulnerabilities_found="true"
     echo "CRITICAL_VULNERABILITIES_FOUND=${critical_vulnerabilities_found}" >> $GITHUB_ENV 
