@@ -24,12 +24,12 @@ runs:
       uses: actions/checkout@v3
 
     - name: Prerequisite Variables
-      if: contains(${{ inputs.NOTIFICATION_TYPES }}, 'pull-request')
+      # if: contains(${{ inputs.NOTIFICATION_TYPES }}, 'pull-request')
       run: prerequisite.sh
       shell: bash
 
     - name: Check Prerequisite Variables
-      if: contains(${{ inputs.NOTIFICATION_TYPES }}, 'pull-request')
+      # if: contains(${{ inputs.NOTIFICATION_TYPES }}, 'pull-request')
       run: |
         echo ${{ env.CRITICAL_VULNERABILITIES_FOUND }}
       shell: bash  
