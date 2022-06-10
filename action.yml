@@ -41,30 +41,30 @@ runs:
         GITHUB_REPOSITORY: ${{ inputs.GITHUB_REPOSITORY }}  
         GITHUB_RUN_ID: ${{ inputs.GITHUB_RUN_ID }}                       
 
-      ##################
-      #### Pull Requests
-      ##################
-      - name: Setting Up Pull-Request Body
-        if: contains(inputs.NOTIFICATION_TYPES, 'pull_request')
-        run: ${{ github.action_path }}/pull-request.sh
-        env:
-          GITHUB_ACTION_URL: ${{ env.GITHUB_ACTION_URL }}
-          test_result_emoji: ${{ env.TEST_RESULT_EMOJI }}
-          critical_emoji: ${{ env.CRITICAL_EMOJI }}
-          critical2: ${{ env.CRITICAL_NUMBER_OF_VULNERABILITIES }}
-          high_emoji: ${{ env.HIGH_EMOJI }}
-          high2: ${{ env.HIGH_NUMBER_OF_VULNERABILITIES }}
+    ##################
+    #### Pull Requests
+    ##################
+    - name: Setting Up Pull-Request Body
+      if: contains(inputs.NOTIFICATION_TYPES, 'pull_request')
+      run: ${{ github.action_path }}/pull-request.sh
+      env:
+        GITHUB_ACTION_URL: ${{ env.GITHUB_ACTION_URL }}
+        test_result_emoji: ${{ env.TEST_RESULT_EMOJI }}
+        critical_emoji: ${{ env.CRITICAL_EMOJI }}
+        critical2: ${{ env.CRITICAL_NUMBER_OF_VULNERABILITIES }}
+        high_emoji: ${{ env.HIGH_EMOJI }}
+        high2: ${{ env.HIGH_NUMBER_OF_VULNERABILITIES }}
 
-      - name: Update the Pull-Request Body
-        if: contains(inputs.NOTIFICATION_TYPES, 'pull_request')
-        uses: tzkhan/pr-update-action@v2
-        with:
-          repo-token: "${{ inputs.GITHUB_ACCESS_TOKEN }}"
-          base-branch-regex: '[a-z\d-_.\\/]+'
-          body-template: |           
-            ${{ env.SUMMARY_OF_THE_SCAN }}
-          body-update-action: 'suffix'
-          body-uppercase-base-match: false
+    - name: Update the Pull-Request Body
+      if: contains(inputs.NOTIFICATION_TYPES, 'pull_request')
+      uses: tzkhan/pr-update-action@v2
+      with:
+        repo-token: "${{ inputs.GITHUB_ACCESS_TOKEN }}"
+        base-branch-regex: '[a-z\d-_.\\/]+'
+        body-template: |           
+          ${{ env.SUMMARY_OF_THE_SCAN }}
+        body-update-action: 'suffix'
+        body-uppercase-base-match: false
 
 
       # ##################
