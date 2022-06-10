@@ -52,4 +52,4 @@ echo "HIGH_EMOJI=${high_emoji}" >> $GITHUB_ENV
 echo "TEST_RESULT_EMOJI=${test_result_emoji}" >> $GITHUB_ENV
 echo "SLACK_ATTACHMENT_BAR_COLOR=${slack_attachment_bar_color}" >> $GITHUB_ENV
 echo "SUMMARY_REPORT_MSG=${summary_report_msg}" >> $GITHUB_ENV
-echo "GITHUB_ACTION_URL=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" >> $GITHUB_ENV
+echo "GITHUB_ACTION_URL=${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" >> $GITHUB_ENV

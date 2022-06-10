@@ -15,6 +15,15 @@ inputs:
   GITHUB_ACCESS_TOKEN:
     required: false
     description: 'github Access token to update the PR (required only if "NOTIFICATION_TYPES" contains pull-request)'
+  GITHUB_SERVER_URL:
+    required: false
+    description: 'github server url'  
+  GITHUB_REPOSITORY:
+    required: false
+    description: 'name of the github repository'  
+  GITHUB_RUN_ID:
+    required: false
+    description: 'github action run id'  
 
 runs:
   using: "composite"
@@ -29,6 +38,9 @@ runs:
       shell: bash
       env:
         DOCKER_IMAGE_TO_SCAN: ${{ inputs.IMAGE }}
+        GITHUB_SERVER_URL: ${{ inputs.GITHUB_SERVER_URL }} 
+        GITHUB_REPOSITORY: ${{ inputs.GITHUB_REPOSITORY }}  
+        GITHUB_RUN_ID: ${{ inputs.GITHUB_RUN_ID }}                       
 
     - name: Check Prerequisite Variables
       # if: contains(${{ inputs.NOTIFICATION_TYPES }}, 'pull-request')
