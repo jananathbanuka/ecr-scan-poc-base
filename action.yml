@@ -25,11 +25,11 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Prerequisite Variables
-        if: contains('${{ inputs.NOTIFICATION_TYPES }}', 'pull-request')
+        if: contains('${{ env.NOTIFICATION_TYPES }}', 'pull-request')
         run: ./prerequisite.sh
 
       - name: Check Prerequisite Variables
-        if: contains('${{ inputs.NOTIFICATION_TYPES }}', 'pull-request')
+        if: contains('${{ env.NOTIFICATION_TYPES }}', 'pull-request')
         run: |
           echo ${{ env.CRITICAL_VULNERABILITIES_FOUND }}
 
@@ -42,16 +42,16 @@ jobs:
       # #### Pull Requests
       # ##################
       # - name: Setting Up Pull-Request Body
-      #   if: contains('${{ inputs.NOTIFICATION_TYPES }}', 'pull-request') # "${{ inputs.NOTIFICATION_TYPES == 'pull-request' }}"
+      #   if: contains('${{ env.NOTIFICATION_TYPES }}', 'pull-request') # "${{ env.NOTIFICATION_TYPES == 'pull-request' }}"
       #   run: ./pull-request.sh
       #   env:
-      #     DOCKER_IMAGE_TO_SCAN: ${{ inputs.IMAGE }}
+      #     DOCKER_IMAGE_TO_SCAN: ${{ env.IMAGE }}
 
       # - name: Updare the Pull-Request Body
-      #   if: contains('${{ inputs.NOTIFICATION_TYPES }}', 'pull-request')
+      #   if: contains('${{ env.NOTIFICATION_TYPES }}', 'pull-request')
       #   uses: tzkhan/pr-update-action@v2
       #   with:
-      #     repo-token: "${{ inputs.GITHUB_ACCESS_TOKEN }}"
+      #     repo-token: "${{ env.GITHUB_ACCESS_TOKEN }}"
       #     base-branch-regex: '[a-z\d-_.\\/]+'
       #     body-template: |           
       #       ${{ env.SUMMARY_OF_THE_SCAN }}
@@ -63,10 +63,10 @@ jobs:
       # #### Slack
       # ##################
       # - name: Setting Up Slack Notification
-      #   if: contains('${{ inputs.NOTIFICATION_TYPES }}', 'slack')
+      #   if: contains('${{ env.NOTIFICATION_TYPES }}', 'slack')
       #   run: ./slack.sh
       #   env:
-      #     DOCKER_IMAGE_TO_SCAN: ${{ inputs.IMAGE }}
+      #     DOCKER_IMAGE_TO_SCAN: ${{ env.IMAGE }}
           
 
 
@@ -79,7 +79,7 @@ jobs:
       # - name: Send Slack Notification
       #   id: slack
       #   uses: slackapi/slack-github-action@v1.19.0
-      #   if: contains('${{ inputs.NOTIFICATION_TYPES }}', 'slack')
+      #   if: contains('${{ env.NOTIFICATION_TYPES }}', 'slack')
       #   with:
       #     payload: |
       #       {
