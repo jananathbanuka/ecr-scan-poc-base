@@ -144,3 +144,9 @@ runs:
       env:
         SLACK_WEBHOOK_URL: ${{ inputs.SLACK_WEBHOOK_URL }}
         SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK    
+
+    - name: Full Report
+      run: ${{ github.action_path }}/scripts/prerequisite.sh
+      shell: bash
+      env:
+        FULL_REPORT: "TRUE"
