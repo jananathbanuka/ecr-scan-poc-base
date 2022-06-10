@@ -16,29 +16,27 @@ inputs:
     required: false
     description: 'github Access token to update the PR (required only if "NOTIFICATION_TYPES" contains pull-request)'
 
-jobs:
-  trivy:
-    runs-on: ubuntu-latest
-    using: "composite"
-    steps:
+runs:
+  using: "composite"
+  steps:
 
-      - name: Checkout code
-        uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      - name: Prerequisite Variables
-        if: contains(${{ inputs.NOTIFICATION_TYPES }}, 'pull-request')
-        run: ./prerequisite.sh
-        shell: bash
+    - name: Prerequisite Variables
+      if: contains(${{ inputs.NOTIFICATION_TYPES }}, 'pull-request')
+      run: ./prerequisite.sh
+      shell: bash
 
-      - name: Check Prerequisite Variables
-        if: contains(${{ inputs.NOTIFICATION_TYPES }}, 'pull-request')
-        run: |
-          echo ${{ env.CRITICAL_VULNERABILITIES_FOUND }}
+    - name: Check Prerequisite Variables
+      if: contains(${{ inputs.NOTIFICATION_TYPES }}, 'pull-request')
+      run: |
+        echo ${{ env.CRITICAL_VULNERABILITIES_FOUND }}
 
- 
-      - run: echo Hello ${{ inputs.IMAGE }}.
-        shell: bash
- 
+
+    - run: echo Hello ${{ inputs.IMAGE }}.
+      shell: bash
+
  
       # ##################
       # #### Pull Requests
