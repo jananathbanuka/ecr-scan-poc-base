@@ -66,80 +66,80 @@ runs:
       with:
         payload: |
           {
-              "attachments": [
+            "attachments": [
+              {
+                "color": "${{ env.SLACK_ATTACHMENT_BAR_COLOR }}",
+                "blocks": [
                   {
-                      "color": "${{ env.SLACK_ATTACHMENT_BAR_COLOR }}",
-                      "blocks": [
-                          {
-                              "type": "header",
-                              "text": {
-                                  "type": "plain_text",
-                                  "text": "${{ env.TEST_RESULT_EMOJI }} ${{ env.SUMMARY_REPORT_MSG }} - ${{ inputs.IMAGE }}",
-                                  "emoji": true
-                              }
-                          },
-                          {
-                              "type": "header",
-                              "text": {
-                                  "type": "plain_text",
-                                  "text": "Scan Summary",
-                                  "emoji": true
-                              }
-                          },
-                          {
-                              "type": "divider"
-                          },
-                          {
-                              "type": "section",
-                              "fields": [
-                                  {
-                                      "type": "mrkdwn",
-                                      "text": "```Severity```"
-                                  },
-                                  {
-                                      "type": "mrkdwn",
-                                      "text": "```Vulnerability Count```"
-                                  },
-                                  {
-                                      "type": "mrkdwn",
-                                      "text": "${{ env.CRITICAL_EMOJI }} Critical"
-                                  },
-                                  {
-                                      "type": "mrkdwn",
-                                      "text": "${{ env.CRITICAL_NUMBER_OF_VULNERABILITIES }}"
-                                  },
-                                  {
-                                      "type": "mrkdwn",
-                                      "text": "${{ env.HIGH_EMOJI }} High"
-                                  },
-                                  {
-                                      "type": "mrkdwn",
-                                      "text": "${{ env.HIGH_NUMBER_OF_VULNERABILITIES }}"
-                                  }
-                              ]
-                          },
-                          {
-                              "type": "section",
-                              "text": {
-                                  "type": "mrkdwn",
-                                  "text": ":memo: See the Full Scanning Report"
-                              },
-                              "accessory": {
-                                  "type": "button",
-                                  "text": {
-                                      "type": "plain_text",
-                                      "text": "View Report",
-                                      "emoji": true
-                                  },
-                                  "value": "report",
-                                  "url": "${{ env.GITHUB_ACTION_URL }}",
-                                  "action_id": "button-action"
-                              }
-                          }
-                      ]
+                    "type": "header",
+                    "text": {
+                      "type": "plain_text",
+                      "text": "${{ env.TEST_RESULT_EMOJI }} ${{ env.SUMMARY_REPORT_MSG }} - ${{ inputs.IMAGE }}",
+                      "emoji": true
+                    }
+                  },
+                  {
+                    "type": "header",
+                    "text": {
+                      "type": "plain_text",
+                      "text": "Scan Summary",
+                      "emoji": true
+                    }
+                  },
+                  {
+                    "type": "divider"
+                  },
+                  {
+                    "type": "section",
+                    "fields": [
+                      {
+                        "type": "mrkdwn",
+                        "text": "```Severity```"
+                      },
+                      {
+                        "type": "mrkdwn",
+                        "text": "```Vulnerability Count```"
+                      },
+                      {
+                        "type": "mrkdwn",
+                        "text": "${{ env.CRITICAL_EMOJI }} Critical"
+                      },
+                      {
+                        "type": "mrkdwn",
+                        "text": "${{ env.CRITICAL_NUMBER_OF_VULNERABILITIES }}"
+                      },
+                      {
+                        "type": "mrkdwn",
+                        "text": "${{ env.HIGH_EMOJI }} High"
+                      },
+                      {
+                        "type": "mrkdwn",
+                        "text": "${{ env.HIGH_NUMBER_OF_VULNERABILITIES }}"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "section",
+                    "text": {
+                      "type": "mrkdwn",
+                      "text": ":memo: See the Full Scanning Report"
+                    },
+                    "accessory": {
+                      "type": "button",
+                      "text": {
+                        "type": "plain_text",
+                        "text": "View Report",
+                        "emoji": true
+                      },
+                      "value": "report",
+                      "url": "${{ env.GITHUB_ACTION_URL }}",
+                      "action_id": "button-action"
+                    }
                   }
-              ]
-          }                            
+                ]
+              }
+            ]
+          }                          
       env:
         SLACK_WEBHOOK_URL: ${{ inputs.SLACK_WEBHOOK_URL }}
         SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
