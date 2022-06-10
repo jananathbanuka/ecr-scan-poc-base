@@ -37,9 +37,9 @@ runs:
       shell: bash
       env:
         DOCKER_IMAGE_TO_SCAN: ${{ inputs.IMAGE }}
-        GITHUB_SERVER_URL: ${{ inputs.GITHUB_SERVER_URL }} 
-        GITHUB_REPOSITORY: ${{ inputs.GITHUB_REPOSITORY }}  
-        GITHUB_RUN_ID: ${{ inputs.GITHUB_RUN_ID }}                       
+        GITHUB_SERVER_URL: ${{ github.server_url }}
+        GITHUB_REPOSITORY: ${{ github.repository }}
+        GITHUB_RUN_ID: ${{ github.run_id }}               
 
     ##################
     #### Pull Requests
