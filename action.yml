@@ -46,10 +46,15 @@ runs:
       if: contains(${{ inputs.NOTIFICATION_TYPES }}, 'pull-request')
       run: |
         echo ${{ env.CRITICAL_VULNERABILITIES_FOUND }}
+        echo "------- notification types --------"
+        echo ${{ inputs.NOTIFICATION_TYPES }}
+        echo "------- notification types --------"
       shell: bash  
 
 
-    - run: echo Hello ${{ inputs.IMAGE }}.
+    - run: |
+        echo Hello ${{ inputs.IMAGE }}
+        echo 
       shell: bash
 
  
