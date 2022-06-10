@@ -107,11 +107,11 @@ runs:
                               "fields": [
                                   {
                                       "type": "mrkdwn",
-                                      "text": "```Severity```"
+                                      "text": ">Severity"
                                   },
                                   {
                                       "type": "mrkdwn",
-                                      "text": "```Vulnerability Count```"
+                                      "text": ">Vulnerability Count"
                                   },
                                   {
                                       "type": "mrkdwn",
