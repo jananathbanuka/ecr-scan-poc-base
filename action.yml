@@ -27,7 +27,7 @@ runs:
       uses: actions/checkout@v3
 
     - name: Prerequisite Variables
-      run: ${{ github.action_path }}/prerequisite.sh
+      run: ${{ github.action_path }}/scripts/prerequisite.sh
       shell: bash
       env:
         DOCKER_IMAGE_TO_SCAN: ${{ inputs.IMAGE }}
@@ -38,7 +38,7 @@ runs:
 
     - name: Setting Up Pull-Request Body
       if: contains(inputs.NOTIFICATION_TYPES, 'pull_request')
-      run: ${{ github.action_path }}/pull-request.sh
+      run: ${{ github.action_path }}/scripts/pull-request.sh
       shell: bash
       env:
         GITHUB_ACTION_URL: ${{ env.GITHUB_ACTION_URL }}
