@@ -72,8 +72,7 @@ runs:
       uses: slackapi/slack-github-action@v1.19.0
       if: contains(inputs.NOTIFICATION_TYPES, 'slack')
       with:
-        payload-file-path: "./payload-slack-content.json"
-                                
+        payload-file-path: "${{ github.action_path }}/slack_payload.json"                              
       env:
         SLACK_WEBHOOK_URL: ${{ inputs.SLACK_WEBHOOK_URL }}
         SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
