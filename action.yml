@@ -33,7 +33,7 @@ runs:
       uses: actions/checkout@v3
 
     - name: Prerequisite Variables
-      # if: contains(${{ inputs.NOTIFICATION_TYPES }}, 'pull-request')
+      if: contains(${{ inputs.NOTIFICATION_TYPES }}, 'pull-request')
       run: ${{ github.action_path }}/prerequisite.sh
       shell: bash
       env:
@@ -43,7 +43,7 @@ runs:
         GITHUB_RUN_ID: ${{ inputs.GITHUB_RUN_ID }}                       
 
     - name: Check Prerequisite Variables
-      # if: contains(${{ inputs.NOTIFICATION_TYPES }}, 'pull-request')
+      if: contains(${{ inputs.NOTIFICATION_TYPES }}, 'pull-request')
       run: |
         echo ${{ env.CRITICAL_VULNERABILITIES_FOUND }}
       shell: bash  
