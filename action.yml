@@ -27,6 +27,8 @@ runs:
       # if: contains(${{ inputs.NOTIFICATION_TYPES }}, 'pull-request')
       run: ${{ github.action_path }}/prerequisite.sh
       shell: bash
+      env:
+        DOCKER_IMAGE_TO_SCAN: ${{ inputs.IMAGE }}
 
     - name: Check Prerequisite Variables
       # if: contains(${{ inputs.NOTIFICATION_TYPES }}, 'pull-request')

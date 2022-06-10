@@ -17,7 +17,7 @@ slack_attachment_bar_color="#0CFE6B" # green
 summary_report_msg="No Vulnerabilities Found, Everything looks Good!"
 
 critical_emoji=":red_circle:"
-if [ "$critical2" -eq 0 ]; then
+if [ "$critical2" == 0 ]; then
 critical_emoji=":white_check_mark:"
 else
 slack_attachment_bar_color="#FE360C" # red
@@ -26,9 +26,9 @@ fi
 
 high_emoji=":large_orange_diamond:"
 high_vulnerabilities_found="false"
-if [ "$high2" -eq 0 ]; then
+if [ "$high2" == 0 ]; then
 high_emoji=":white_check_mark:"
-elif [ $critical2 -eq 0 ] && [ $high2  -nq 0 ]; then
+elif [ $critical2 == 0 ] && [ $high2  != 0 ]; then
 high_vulnerabilities_found="true"
 slack_attachment_bar_color="#FBB215" # orange\
 summary_report_msg="HIGH Vulnerabilities Found!, Have a Look!"
@@ -37,7 +37,7 @@ fi
 
 test_result_emoji=":boom:"
 critical_vulnerabilities_found="false"
-if [ $critical2 -eq 0 ] && [ $high2  -eq 0 ]; then
+if [ $critical2 == 0 ] && [ $high2  == 0 ]; then
 test_result_emoji=":eight_spoked_asterisk:"
 else
 critical_vulnerabilities_found="true"
