@@ -82,21 +82,26 @@ runs:
                               "type": "header",
                               "text": {
                                   "type": "plain_text",
-                                  "text": "${{ env.TEST_RESULT_EMOJI }} ${{ env.SUMMARY_REPORT_MSG }} - \n[ :whale: ${{ inputs.IMAGE }} ]",
+                                  "text": "${{ env.TEST_RESULT_EMOJI }} ${{ env.SUMMARY_REPORT_MSG }}",
                                   "emoji": true
                               }
                           },
+                          {
+                            "type": "section",
+                            "text": {
+                              "type": "plain_text",
+                              "text": ":whale: : ${{ inputs.IMAGE }}",
+                              "emoji": true
+                            }
+                          },                          
                           {
                               "type": "header",
                               "text": {
                                   "type": "plain_text",
-                                  "text": "Scan Summary",
+                                  "text": "Trivy Scan Summary",
                                   "emoji": true
                               }
-                          },
-                          {
-                              "type": "divider"
-                          },
+                          },              
                           {
                               "type": "section",
                               "fields": [
