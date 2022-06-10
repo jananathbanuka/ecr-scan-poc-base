@@ -2,19 +2,21 @@ name: Trvivy Vulnerability Scanner for Docker Images
 description: This Github Actions performs static vulnerability scanning of docker images and brings back the results to the Slack/Pull-Request
 author: devops@ebot7
 
-inputs:
-  IMAGE:
-    required: true
-    description: 'name of image built'   
-  NOTIFICATION_TYPES:
-    required: false
-    description: 'comma separated list notification types (slack, pull-request)'
-  SLACK_WEBHOOK:
-    required: false
-    description: 'slack webhook url for notifications (required only if NOTIFICATION_TYPES contains slack)'
-  GITHUB_ACCESS_TOKEN:
-    required: false
-    description: 'github Access token to update the PR (required only if "NOTIFICATION_TYPES" contains pull-request)'
+on:
+  workflow_dispatch:
+    inputs:
+      IMAGE:
+        required: true
+        description: 'name of image built'   
+      NOTIFICATION_TYPES:
+        required: false
+        description: 'comma separated list notification types (slack, pull-request)'
+      SLACK_WEBHOOK:
+        required: false
+        description: 'slack webhook url for notifications (required only if NOTIFICATION_TYPES contains slack)'
+      GITHUB_ACCESS_TOKEN:
+        required: false
+        description: 'github Access token to update the PR (required only if "NOTIFICATION_TYPES" contains pull-request)'
 
 jobs:
   trivy:
@@ -25,11 +27,11 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Prerequisite Variables
-        if: contains('${{ env.NOTIFICATION_TYPES }}', 'pull-request')
+        if: contains('${{ inputs.NOTIFICATION_TYPES }}', 'pull-request')
         run: ./prerequisite.sh
 
       - name: Check Prerequisite Variables
-        if: contains('${{ env.NOTIFICATION_TYPES }}', 'pull-request')
+        if: contains('${{ inputs.NOTIFICATION_TYPES }}', 'pull-request')
         run: |
           echo ${{ env.CRITICAL_VULNERABILITIES_FOUND }}
 
@@ -42,16 +44,16 @@ jobs:
       # #### Pull Requests
       # ##################
       # - name: Setting Up Pull-Request Body
-      #   if: contains('${{ env.NOTIFICATION_TYPES }}', 'pull-request') # "${{ env.NOTIFICATION_TYPES == 'pull-request' }}"
+      #   if: contains('${{ inputs.NOTIFICATION_TYPES }}', 'pull-request') # "${{ inputs.NOTIFICATION_TYPES == 'pull-request' }}"
       #   run: ./pull-request.sh
       #   env:
-      #     DOCKER_IMAGE_TO_SCAN: ${{ env.IMAGE }}
+      #     DOCKER_IMAGE_TO_SCAN: ${{ inputs.IMAGE }}
 
       # - name: Updare the Pull-Request Body
-      #   if: contains('${{ env.NOTIFICATION_TYPES }}', 'pull-request')
+      #   if: contains('${{ inputs.NOTIFICATION_TYPES }}', 'pull-request')
       #   uses: tzkhan/pr-update-action@v2
       #   with:
-      #     repo-token: "${{ env.GITHUB_ACCESS_TOKEN }}"
+      #     repo-token: "${{ inputs.GITHUB_ACCESS_TOKEN }}"
       #     base-branch-regex: '[a-z\d-_.\\/]+'
       #     body-template: |           
       #       ${{ env.SUMMARY_OF_THE_SCAN }}
@@ -63,10 +65,10 @@ jobs:
       # #### Slack
       # ##################
       # - name: Setting Up Slack Notification
-      #   if: contains('${{ env.NOTIFICATION_TYPES }}', 'slack')
+      #   if: contains('${{ inputs.NOTIFICATION_TYPES }}', 'slack')
       #   run: ./slack.sh
       #   env:
-      #     DOCKER_IMAGE_TO_SCAN: ${{ env.IMAGE }}
+      #     DOCKER_IMAGE_TO_SCAN: ${{ inputs.IMAGE }}
           
 
 
@@ -79,7 +81,7 @@ jobs:
       # - name: Send Slack Notification
       #   id: slack
       #   uses: slackapi/slack-github-action@v1.19.0
-      #   if: contains('${{ env.NOTIFICATION_TYPES }}', 'slack')
+      #   if: contains('${{ inputs.NOTIFICATION_TYPES }}', 'slack')
       #   with:
       #     payload: |
       #       {
