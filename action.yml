@@ -28,6 +28,7 @@ jobs:
       - name: Prerequisite Variables
         if: contains(${{ inputs.NOTIFICATION_TYPES }}, 'pull-request')
         run: ./prerequisite.sh
+        shell: bash
 
       - name: Check Prerequisite Variables
         if: contains(${{ inputs.NOTIFICATION_TYPES }}, 'pull-request')
