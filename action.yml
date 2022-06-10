@@ -2,21 +2,19 @@ name: Trvivy Vulnerability Scanner for Docker Images
 description: This Github Actions performs static vulnerability scanning of docker images and brings back the results to the Slack/Pull-Request
 author: devops@ebot7
 
-on:
-  workflow_dispatch:
-    inputs:
-      IMAGE:
-        required: true
-        description: 'name of image built'   
-      NOTIFICATION_TYPES:
-        required: false
-        description: 'comma separated list notification types (slack, pull-request)'
-      SLACK_WEBHOOK:
-        required: false
-        description: 'slack webhook url for notifications (required only if NOTIFICATION_TYPES contains slack)'
-      GITHUB_ACCESS_TOKEN:
-        required: false
-        description: 'github Access token to update the PR (required only if "NOTIFICATION_TYPES" contains pull-request)'
+inputs:
+  IMAGE:
+    required: true
+    description: 'name of image built'   
+  NOTIFICATION_TYPES:
+    required: false
+    description: 'comma separated list notification types (slack, pull-request)'
+  SLACK_WEBHOOK:
+    required: false
+    description: 'slack webhook url for notifications (required only if NOTIFICATION_TYPES contains slack)'
+  GITHUB_ACCESS_TOKEN:
+    required: false
+    description: 'github Access token to update the PR (required only if "NOTIFICATION_TYPES" contains pull-request)'
 
 jobs:
   trivy:
@@ -27,11 +25,11 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Prerequisite Variables
-        if: contains('${{ inputs.NOTIFICATION_TYPES }}', 'pull-request')
+        if: contains(${{ inputs.NOTIFICATION_TYPES }}, 'pull-request')
         run: ./prerequisite.sh
 
       - name: Check Prerequisite Variables
-        if: contains('${{ inputs.NOTIFICATION_TYPES }}', 'pull-request')
+        if: contains(${{ inputs.NOTIFICATION_TYPES }}, 'pull-request')
         run: |
           echo ${{ env.CRITICAL_VULNERABILITIES_FOUND }}
 
