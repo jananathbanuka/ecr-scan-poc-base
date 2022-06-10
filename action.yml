@@ -47,6 +47,7 @@ runs:
         critical2: ${{ env.CRITICAL_NUMBER_OF_VULNERABILITIES }}
         high_emoji: ${{ env.HIGH_EMOJI }}
         high2: ${{ env.HIGH_NUMBER_OF_VULNERABILITIES }}
+        IMAGE: ${{ inputs.IMAGE }}
 
     - name: Update the Pull-Request Body
       if: contains(inputs.NOTIFICATION_TYPES, 'pull_request')
