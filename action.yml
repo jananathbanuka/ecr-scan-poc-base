@@ -15,6 +15,11 @@ inputs:
   GITHUB_ACCESS_TOKEN:
     required: false
     description: 'github Access token to update the PR (required only if "NOTIFICATION_TYPES" contains pull-request)'
+  SLACK_WEBHOOK_URL:
+    required: false
+    description: 'slack webhook url'  
+
+  
 
 runs:
   using: "composite"
@@ -70,5 +75,5 @@ runs:
         payload-file-path: "./payload-slack-content.json"
                                 
       env:
-        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_WEBHOOK_URL: ${{ inputs.SLACK_WEBHOOK_URL }}
         SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
