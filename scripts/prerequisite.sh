@@ -4,7 +4,7 @@ sudo dpkg -i trivy_0.18.3_Linux-64bit.deb 2> /dev/null
 
 
 if [ "$FULL_REPORT" = "TRUE" ]; then
-    trivy image --format template --template '{{- $critical := 0 }}{{- $high := 0 }}{{- range . }}{{- range .Vulnerabilities }}{{- if  eq .Severity "CRITICAL" }}{{- $critical = add $critical 1 }}{{- end }}{{- if  eq .Severity "HIGH" }}{{- $high = add $high 1 }}{{- end }}{{- end }}{{- end }}Critical: {{ $critical }}, High: {{ $high }}' ${DOCKER_IMAGE_TO_SCAN}
+    trivy image ${DOCKER_IMAGE_TO_SCAN}
 else
     trivy image --format template --template '{{- $critical := 0 }}{{- $high := 0 }}{{- range . }}{{- range .Vulnerabilities }}{{- if  eq .Severity "CRITICAL" }}{{- $critical = add $critical 1 }}{{- end }}{{- if  eq .Severity "HIGH" }}{{- $high = add $high 1 }}{{- end }}{{- end }}{{- end }}Critical: {{ $critical }}, High: {{ $high }}' ${DOCKER_IMAGE_TO_SCAN} | grep -i "Critical:" > scan_results 
 

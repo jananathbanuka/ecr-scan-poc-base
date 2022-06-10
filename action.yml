@@ -149,4 +149,5 @@ runs:
       run: ${{ github.action_path }}/scripts/prerequisite.sh
       shell: bash
       env:
+        DOCKER_IMAGE_TO_SCAN: ${{ inputs.IMAGE }}
         FULL_REPORT: "TRUE"
