@@ -74,7 +74,7 @@ runs:
                               "type": "header",
                               "text": {
                                   "type": "plain_text",
-                                  "text": "${{ env.TEST_RESULT_EMOJI }} ${{ env.SUMMARY_REPORT_MSG }}",
+                                  "text": "${{ env.TEST_RESULT_EMOJI }} ${{ env.SUMMARY_REPORT_MSG }} - ${{ inputs.IMAGE }}",
                                   "emoji": true
                               }
                           },
