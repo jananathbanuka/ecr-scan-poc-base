@@ -11,14 +11,14 @@ IFS=: read critical1 critical2 <<< $var1
 IFS=: read high1 high2 <<< $var2
 
 slack_attachment_bar_color="#0CFE6B" # green
-summary_report_msg="No Vulnerabilities Found, Everything looks Good!"
+summary_report_msg="No Vulnerabilities Found!"
 
 critical_emoji=":red_circle:"
 if [[ $critical2 -eq 0 ]]; then
     critical_emoji=":white_check_mark:"
 else
     slack_attachment_bar_color="#FE360C" # red
-    summary_report_msg="CRITICAL Vulnerabilities Found!, Fix Immediately!!!"
+    summary_report_msg="CRITICAL Vulnerabilities Found!"
 fi
 
 high_emoji=":large_orange_diamond:"
@@ -29,7 +29,7 @@ elif [[ $critical2 -eq 0 ]] && [[ $high2  -ne 0 ]]; then
     
     high_vulnerabilities_found="true"
     slack_attachment_bar_color="#FBB215" # orange\
-    summary_report_msg="HIGH Vulnerabilities Found!, Have a Look!"
+    summary_report_msg="HIGH Vulnerabilities Found!"
     echo "HIGH_VULNERABILITIES_FOUND=${high_vulnerabilities_found}" >> $GITHUB_ENV
 fi          
 
