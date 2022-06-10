@@ -10,9 +10,6 @@ IFS=, read var1 var2 <<< $content
 IFS=: read critical1 critical2 <<< $var1
 IFS=: read high1 high2 <<< $var2
 
-echo $var1
-echo $var2
-
 slack_attachment_bar_color="#0CFE6B" # green
 summary_report_msg="No Vulnerabilities Found, Everything looks Good!"
 
@@ -46,17 +43,8 @@ else
     echo "CRITICAL_VULNERABILITIES_FOUND=${critical_vulnerabilities_found}" >> $GITHUB_ENV 
 fi 
 
-# reset the variables 
-echo 'CRITICAL_NUMBER_OF_VULNERABILITIES=' >> $GITHUB_ENV
-echo 'HIGH_NUMBER_OF_VULNERABILITIES=' >> $GITHUB_ENV
-
 echo "CRITICAL_NUMBER_OF_VULNERABILITIES=${critical2}" >> $GITHUB_ENV
 echo "HIGH_NUMBER_OF_VULNERABILITIES=${high2}" >> $GITHUB_ENV
-
-echo "------------------------"
-echo $critical2
-echo $high2
-echo "------------------------"
 
 echo "CRITICAL_EMOJI=${critical_emoji}" >> $GITHUB_ENV
 echo "HIGH_EMOJI=${high_emoji}" >> $GITHUB_ENV
