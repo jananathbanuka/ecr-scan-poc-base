@@ -60,13 +60,6 @@ runs:
         body-update-action: 'suffix'
         body-uppercase-base-match: false
 
-    - name: test variables
-      shell: bash
-      run: |
-        echo "${{ env.CRITICAL_NUMBER_OF_VULNERABILITIES }}"
-        echo "${{ env.HIGH_NUMBER_OF_VULNERABILITIES }}"
-
-
     - name: Send Slack Notification
       id: slack
       uses: slackapi/slack-github-action@v1.19.0
@@ -82,18 +75,10 @@ runs:
                               "type": "header",
                               "text": {
                                   "type": "plain_text",
-                                  "text": "${{ env.TEST_RESULT_EMOJI }} ${{ env.SUMMARY_REPORT_MSG }}",
+                                  "text": "${{ env.TEST_RESULT_EMOJI }} ${{ env.SUMMARY_REPORT_MSG }}\n :whale: - ${{ inputs.IMAGE }}",
                                   "emoji": true
                               }
-                          },
-                          {
-                            "type": "section",
-                            "text": {
-                              "type": "plain_text",
-                              "text": ":whale: : ${{ inputs.IMAGE }}",
-                              "emoji": true
-                            }
-                          },                          
+                          },                               
                           {
                               "type": "header",
                               "text": {
@@ -101,17 +86,20 @@ runs:
                                   "text": "Trivy Scan Summary",
                                   "emoji": true
                               }
-                          },              
+                          },   
+                          {
+                            "type": "divider"
+                          },                                     
                           {
                               "type": "section",
                               "fields": [
                                   {
                                       "type": "mrkdwn",
-                                      "text": ">Severity"
+                                      "text": "```Severity```"
                                   },
                                   {
                                       "type": "mrkdwn",
-                                      "text": ">Vulnerability Count"
+                                      "text": "```Vulnerability Count```"
                                   },
                                   {
                                       "type": "mrkdwn",
