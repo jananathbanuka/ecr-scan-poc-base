@@ -43,8 +43,17 @@ else
     echo "CRITICAL_VULNERABILITIES_FOUND=${critical_vulnerabilities_found}" >> $GITHUB_ENV 
 fi 
 
+# reset the variables 
+echo 'CRITICAL_NUMBER_OF_VULNERABILITIES=' >> $GITHUB_ENV
+echo 'HIGH_NUMBER_OF_VULNERABILITIES=' >> $GITHUB_ENV
+
 echo "CRITICAL_NUMBER_OF_VULNERABILITIES=${critical2}" >> $GITHUB_ENV
 echo "HIGH_NUMBER_OF_VULNERABILITIES=${high2}" >> $GITHUB_ENV
+
+echo "------------------------"
+echo $critical2
+echo $high2
+echo "------------------------"
 
 echo "CRITICAL_EMOJI=${critical_emoji}" >> $GITHUB_ENV
 echo "HIGH_EMOJI=${high_emoji}" >> $GITHUB_ENV

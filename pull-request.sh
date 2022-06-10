@@ -6,6 +6,7 @@ echo  ":memo: [View the Full Report](${GITHUB_ACTION_URL})" >> pr_body
 
 # Reset the variable
 echo 'SUMMARY_OF_THE_SCAN=' >> $GITHUB_ENV
+
 echo 'SUMMARY_OF_THE_SCAN<<EOF' >> $GITHUB_ENV
 cat pr_body >> $GITHUB_ENV
 echo 'EOF' >> $GITHUB_ENV
