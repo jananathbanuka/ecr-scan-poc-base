@@ -10,6 +10,9 @@ IFS=, read var1 var2 <<< $content
 IFS=: read critical1 critical2 <<< $var1
 IFS=: read high1 high2 <<< $var2
 
+echo $var1
+echo $var2
+
 slack_attachment_bar_color="#0CFE6B" # green
 summary_report_msg="No Vulnerabilities Found, Everything looks Good!"
 
